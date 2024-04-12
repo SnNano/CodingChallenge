@@ -17,14 +17,66 @@
             width="56"
             height="56"
           />
-          <input type="file" class="file-input" />
+          <input type="file" id="imageUpload" class="file-input" />
           <p id="file-name">
             Drag and Drop a file here or
             <span class="choose-file">Choose a file</span>
           </p>
         </div>
       </div>
-      <div class="flex-1"></div>
+      <div class="flex-1 center-elements display-image full">
+        <div class="image-wrapper center-elements">
+          <img
+            id="displayImage"
+            src="#"
+            alt="displayed pic"
+            style="display: none"
+          />
+        </div>
+        <div class="flex-1">
+          <div class="row">
+            <div class="ranges">
+              <label>Brightness</label>
+              <input
+                type="range"
+                id="brightness"
+                min="0"
+                max="200"
+                value="100"
+              />
+            </div>
+            <div class="ranges">
+              <label>Contrast</label>
+              <input type="range" id="contrast" min="0" max="200" value="100" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="ranges">
+              <label>Sepia</label>
+              <input type="range" id="sepia" min="0" max="200" value="100" />
+            </div>
+            <div class="ranges">
+              <label>GrayScale</label>
+              <input
+                type="range"
+                id="grayscale"
+                min="0"
+                max="200"
+                value="100"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="ranges">
+              <label>Blur</label>
+              <input type="range" id="blur" min="0" max="10" value="0" />
+            </div>
+          </div>
+          <div class="center-elements button">
+            <button class="save-btn">Save Image</button>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="script.js" defer></script>
   </body>
