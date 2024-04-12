@@ -7,7 +7,25 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="container"></div>
+    <div class="container center-elements">
+      <div class="flex-1 drop-image">
+        <h2>Upload file</h2>
+        <div class="upload-file-area center-elements">
+          <img
+            src="images/upload.png"
+            alt="upload pic"
+            width="56"
+            height="56"
+          />
+          <input type="file" class="file-input" />
+          <p id="file-name">
+            Drag and Drop a file here or
+            <span class="choose-file">Choose a file</span>
+          </p>
+        </div>
+      </div>
+      <div class="flex-1"></div>
+    </div>
     <script src="script.js" defer></script>
   </body>
 </html>
