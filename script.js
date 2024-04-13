@@ -1,3 +1,4 @@
+// Selecting necessary DOM elements
 const imageUpload = document.querySelector("#imageUpload");
 const displayImage = document.querySelector("#displayImage");
 const ranges = document.querySelector("#ranges");
@@ -12,9 +13,11 @@ const filterInputs = {
   contrast: document.querySelector("#contrast"),
 };
 
+// Variables to track filter history and current index
 let filterHistory = [];
 let currentIndex = -1;
 
+// Event listener for image upload
 imageUpload?.addEventListener("change", () => {
   const file = imageUpload.files[0];
   if (file) {
@@ -25,6 +28,7 @@ imageUpload?.addEventListener("change", () => {
   }
 });
 
+// Event listeners for filter input changes
 Object.values(filterInputs).forEach((input) => {
   input?.addEventListener("input", () => {
     applyFilters();
@@ -35,12 +39,14 @@ Object.values(filterInputs).forEach((input) => {
   });
 });
 
+// Reset filter state
 function resetFilterState() {
   filterHistory = [];
   currentIndex = -1;
   saveFilterState();
 }
 
+// Apply filters to the image
 function applyFilters() {
   const filterValues = Object.fromEntries(
     Object.entries(filterInputs).map(([key, input]) => [key, input.value])
@@ -48,6 +54,7 @@ function applyFilters() {
   displayImage.style.filter = `blur(${filterValues.blur}px) sepia(${filterValues.sepia}%) grayscale(${filterValues.grayscale}%) brightness(${filterValues.brightness}%) contrast(${filterValues.contrast}%)`;
 }
 
+// Save current filter state
 function saveFilterState() {
   const state = Object.fromEntries(
     Object.entries(filterInputs).map(([key, input]) => [key, input.value])
@@ -58,11 +65,13 @@ function saveFilterState() {
   updateUndoRedoButtons();
 }
 
+// Update undo and redo buttons state
 function updateUndoRedoButtons() {
   undoBtn.disabled = currentIndex <= 0;
   redoBtn.disabled = currentIndex >= filterHistory.length - 1;
 }
 
+// Event listener for undo button
 undoBtn.addEventListener("click", () => {
   if (currentIndex > 0) {
     applyFiltersFromHistory(currentIndex - 1);
@@ -71,6 +80,7 @@ undoBtn.addEventListener("click", () => {
   }
 });
 
+// Event listener for redo button
 redoBtn.addEventListener("click", () => {
   if (currentIndex < filterHistory.length - 1) {
     applyFiltersFromHistory(currentIndex + 1);
@@ -79,6 +89,7 @@ redoBtn.addEventListener("click", () => {
   }
 });
 
+// Apply filters from filter history
 function applyFiltersFromHistory(number) {
   const state = filterHistory[number];
   for (const [key, value] of Object.entries(state)) {
@@ -87,6 +98,7 @@ function applyFiltersFromHistory(number) {
   applyFilters();
 }
 
+// Event listener for save button
 saveBtn.addEventListener("click", () => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
